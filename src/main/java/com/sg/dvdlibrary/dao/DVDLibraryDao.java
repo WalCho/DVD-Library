@@ -14,8 +14,4 @@ public interface DVDLibraryDao {
     List<DVD> getAllDvds() throws DVDLibraryDaoException;
 
     DVD getDvd(String title) throws DVDLibraryDaoException;
-
-
-
-
 }
