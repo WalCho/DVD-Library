@@ -6,7 +6,7 @@ import java.util.List;
 
 public class DVDLibraryView {
 
-    private UserIO io;
+    private final UserIO io;
 
     public DVDLibraryView(UserIO io) {
         this.io = io;

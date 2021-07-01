@@ -9,8 +9,8 @@ import java.util.List;
 
 public class DVDLibraryController {
 
-    private DVDLibraryView view;
-    private DVDLibraryDao dao;
+    private final DVDLibraryView view;
+    private final DVDLibraryDao dao;
 
     public DVDLibraryController(DVDLibraryDao dao, DVDLibraryView view) {
         this.dao = dao;
@@ -19,7 +19,7 @@ public class DVDLibraryController {
 
     public void run() {
         boolean keepGoing = true;
-        int menuSelection = 0;
+        int menuSelection;
         try{
             while (keepGoing) {
 

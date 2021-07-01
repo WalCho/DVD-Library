@@ -1,7 +1,7 @@
 package com.sg.dvdlibrary.dto;
 
 public class DVD {
-    private String title;
+    private final String title;
     private String releaseDate;
     private String mpaaRating;
     private String directorsName;
