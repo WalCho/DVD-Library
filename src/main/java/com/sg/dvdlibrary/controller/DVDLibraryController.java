@@ -1,12 +1,18 @@
 package com.sg.dvdlibrary.controller;
 
+import com.sg.dvdlibrary.dao.DVDLibraryDao;
+import com.sg.dvdlibrary.dao.DVDLibraryDaoFileImpl;
+import com.sg.dvdlibrary.dto.DVD;
 import com.sg.dvdlibrary.ui.DVDLibraryView;
 import com.sg.dvdlibrary.ui.UserIO;
 import com.sg.dvdlibrary.ui.UserIOConsoleImpl;
 
+import java.util.List;
+
 public class DVDLibraryController {
 
     private DVDLibraryView view = new DVDLibraryView();
+    private DVDLibraryDao dao = new DVDLibraryDaoFileImpl();
     private UserIO io = new UserIOConsoleImpl();
 
     public void run() {
@@ -18,25 +24,21 @@ public class DVDLibraryController {
 
             switch (menuSelection) {
                 case 1:
-                    io.print("LIST DVDs");
+                    listDvds();
                     break;
                 case 2:
-                    io.print("VIEW DVD");
+                case 7:
+                    viewDvd();
                     break;
                 case 3:
-                    io.print("CREATE A DVD");
-                    break;
                 case 4:
-                    io.print("EDIT A DVD");
+                    createDvd();
                     break;
                 case 5:
-                    io.print("REMOVE A DVD");
+                    removeDvd();
                     break;
                 case 6:
                     io.print("ADD/EDIT/DELETE MANY DVDs");
-                    break;
-                case 7:
-                    io.print("SEARCH A DVD BY TITLE");
                     break;
                 case 8:
                     keepGoing = false;
@@ -52,5 +54,32 @@ public class DVDLibraryController {
     
     private int getMenuSelection() {
         return view.printMenuAngGetSelection();
+    }
+
+    private void createDvd() {
+        view.displayCreateDvdBanner();
+        DVD newDvd = view.getNewDvdInfo();
+        dao.addDvd(newDvd.getTitle(), newDvd);
+        view.displayCreateSuccessBanner();
+    }
+
+    private void listDvds() {
+        view.displayAllBanner();
+        List<DVD> dvdList = dao.getAllDvds();
+        view.displayDvdList(dvdList);
+    }
+
+    private void viewDvd() {
+        view.displayDvdBanner();
+        String title = view.getDvdTitleChoice();
+        DVD dvd = dao.getDvd(title);
+        view.displayDvd(dvd);
+    }
+
+    private void removeDvd() {
+        view.displayRemoveDvdBanner();
+        String title = view.getDvdTitleChoice();
+        DVD removedDvd = dao.removeDvd(title);
+        view.displayRemoveResult(removedDvd);
     }
 }

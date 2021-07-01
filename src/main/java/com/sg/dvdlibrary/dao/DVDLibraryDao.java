@@ -1,4 +1,21 @@
 package com.sg.dvdlibrary.dao;
 
+import com.sg.dvdlibrary.dto.DVD;
+
+import java.util.List;
+
+// TODO: Add/edit/delete many DVDs in one session
 public interface DVDLibraryDao {
+
+    DVD addDvd (String title, DVD dvd);
+
+    DVD removeDvd(String title);
+
+    List<DVD> getAllDvds();
+
+    DVD getDvd(String title);
+
+
+
+
 }
