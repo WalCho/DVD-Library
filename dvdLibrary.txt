@@ -1,0 +1,4 @@
+Interstellar::Christopher Nolan::Warner Bros. Pictures::October 26, 2014::PG-13::8.6/10
+The Usual Suspects::Bryan Singer::Spelling Films::January 25, 1995::R::8.5/10
+Pulp Fiction::Quentin Tarantino::Miramax Films::May 21, 1994::R::8.9/10
+Fight Club::David Fincher::20th Century Fox::September 10, 1999::R::8.8/10

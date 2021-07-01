@@ -6,7 +6,11 @@ import java.util.List;
 
 public class DVDLibraryView {
 
-    private UserIO io = new UserIOConsoleImpl();
+    private UserIO io;
+
+    public DVDLibraryView(UserIO io) {
+        this.io = io;
+    }
 
     public int printMenuAngGetSelection() {
         io.print("Main Menu");
@@ -24,10 +28,10 @@ public class DVDLibraryView {
 
     public DVD getNewDvdInfo() {
         String title = io.readString("Please enter DVD Title");
-        String releaseDate = io.readString("Please enter Release Date");
-        String mpaaRating = io.readString("Please enter MPAA Rating");
         String directorsName = io.readString("Please enter Director's Name");
         String studio = io.readString("Please enter Studio");
+        String releaseDate = io.readString("Please enter Release Date");
+        String mpaaRating = io.readString("Please enter MPAA Rating");
         String userRating = io.readString("Please enter User Rating");
         DVD currentDvd = new DVD(title);
         currentDvd.setReleaseDate(releaseDate);
@@ -93,5 +97,18 @@ public class DVDLibraryView {
             io.print("No such DVD.");
         }
         io.readString("Please hit enter to continue");
+    }
+
+    public void displayExitBanner() {
+        io.print("Good Bye!!!");
+    }
+
+    public void displayUnknownCommandBanner() {
+        io.print("Unknown Command!!!");
+    }
+
+    public void displayErrorMessage(String errorMsg) {
+        io.print("=== ERROR ===");
+        io.print(errorMsg);
     }
 }
