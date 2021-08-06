@@ -13,7 +13,7 @@ public class DVDLibraryDaoFileImpl implements DVDLibraryDao{
     private Map<String, DVD> title2Dvd = new HashMap<>();
 
     @Override
-    public DVD addDvd(String title, DVD dvd) throws DVDLibraryDaoException{
+    public DVD addDvd(String title, DVD dvd) throws DVDLibraryPersistenceException {
         loadLibrary();
         DVD newDvd = title2Dvd.put(title, dvd);
         writeLibrary();
@@ -21,7 +21,7 @@ public class DVDLibraryDaoFileImpl implements DVDLibraryDao{
     }
 
     @Override
-    public DVD removeDvd(String title) throws DVDLibraryDaoException{
+    public DVD removeDvd(String title) throws DVDLibraryPersistenceException {
         loadLibrary();
         DVD removedDvd = title2Dvd.remove(title);
         writeLibrary();
@@ -29,13 +29,13 @@ public class DVDLibraryDaoFileImpl implements DVDLibraryDao{
     }
 
     @Override
-    public List<DVD> getAllDvds() throws DVDLibraryDaoException {
+    public List<DVD> getAllDvds() throws DVDLibraryPersistenceException {
         loadLibrary();
         return new ArrayList(title2Dvd.values());
     }
 
     @Override
-    public DVD getDvd(String title) throws DVDLibraryDaoException{
+    public DVD getDvd(String title) throws DVDLibraryPersistenceException {
         loadLibrary();
         return title2Dvd.get(title);
     }
@@ -52,13 +52,13 @@ public class DVDLibraryDaoFileImpl implements DVDLibraryDao{
         return dvdFromFile;
     }
 
-    private void loadLibrary() throws DVDLibraryDaoException {
+    private void loadLibrary() throws DVDLibraryPersistenceException {
         Scanner scanner;
 
         try {
             scanner = new Scanner(new BufferedReader(new FileReader(LIBRARY_FILE)));
         } catch (FileNotFoundException e) {
-            throw new DVDLibraryDaoException("-_- Could not load roster data into memory.", e);
+            throw new DVDLibraryPersistenceException("-_- Could not load roster data into memory.", e);
         }
         String currentLine;
         DVD currentDvd;
@@ -80,13 +80,13 @@ public class DVDLibraryDaoFileImpl implements DVDLibraryDao{
         return dvdAsText;
     }
 
-    private void writeLibrary() throws DVDLibraryDaoException {
+    private void writeLibrary() throws DVDLibraryPersistenceException {
         PrintWriter out;
 
         try {
             out = new PrintWriter(new FileWriter(LIBRARY_FILE));
         } catch (IOException e) {
-            throw new DVDLibraryDaoException("Could not save student data.", e);
+            throw new DVDLibraryPersistenceException("Could not save student data.", e);
         }
         String dvdAsText;
         List<DVD> dvdList = this.getAllDvds();
