@@ -1,13 +1,17 @@
 package com.sg.dvdlibrary.ui;
 
 import com.sg.dvdlibrary.dto.DVD;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class DVDLibraryView {
 
     private final UserIO io;
 
+    @Autowired
     public DVDLibraryView(UserIO io) {
         this.io = io;
     }

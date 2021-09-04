@@ -1,3 +1,4 @@
+Forrest Gump::Robert Zemeckis::Paramount Studios::June 23, 1994::PG-13::8.8/10
 Interstellar::Christopher Nolan::Warner Bros. Pictures::October 26, 2014::PG-13::8.6/10
 The Usual Suspects::Bryan Singer::Spelling Films::January 25, 1995::R::8.5/10
 Pulp Fiction::Quentin Tarantino::Miramax Films::May 21, 1994::R::8.9/10

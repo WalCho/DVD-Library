@@ -1,16 +1,18 @@
 package com.sg.dvdlibrary.dao;
 
 import com.sg.dvdlibrary.dto.DVD;
+import org.springframework.stereotype.Component;
 
 import java.io.*;
 import java.util.*;
 
+@Component
 public class DVDLibraryDaoFileImpl implements DVDLibraryDao{
 
     public static final String LIBRARY_FILE = "dvdLibrary.txt";
     public static final String DELIMITER = "::";
 
-    private Map<String, DVD> title2Dvd = new HashMap<>();
+    private final Map<String, DVD> title2Dvd = new HashMap<>();
 
     @Override
     public DVD addDvd(String title, DVD dvd) throws DVDLibraryPersistenceException {

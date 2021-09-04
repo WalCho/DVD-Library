@@ -1,17 +1,24 @@
 package com.sg.dvdlibrary.service;
 
+import com.sg.dvdlibrary.dao.DVDLibraryAuditDao;
 import com.sg.dvdlibrary.dao.DVDLibraryDao;
 import com.sg.dvdlibrary.dao.DVDLibraryPersistenceException;
 import com.sg.dvdlibrary.dto.DVD;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class DVDLibraryServiceLayerImpl implements DVDLibraryServiceLayer {
 
+    DVDLibraryAuditDao auditDao;
     DVDLibraryDao dao;
 
-    public DVDLibraryServiceLayerImpl(DVDLibraryDao dao) {
+    @Autowired
+    public DVDLibraryServiceLayerImpl(DVDLibraryDao dao, DVDLibraryAuditDao auditDao) {
         this.dao = dao;
+        this.auditDao = auditDao;
     }
 
     @Override
@@ -24,6 +31,7 @@ public class DVDLibraryServiceLayerImpl implements DVDLibraryServiceLayer {
         }
         validateDvdData(dvd);
         dao.addDvd(dvd.getTitle(), dvd);
+        auditDao.writeAuditEntry("DVD " + dvd.getTitle() + " CREATED");
     }
 
     @Override
@@ -38,7 +46,9 @@ public class DVDLibraryServiceLayerImpl implements DVDLibraryServiceLayer {
 
     @Override
     public DVD removeDvd(String title) throws DVDLibraryPersistenceException {
-        return dao.removeDvd(title);
+        DVD removedDvd = dao.removeDvd(title);
+        auditDao.writeAuditEntry("DVD " + title + " REMOVED");
+        return removedDvd;
     }
 
     private void validateDvdData(DVD dvd) throws DVDLibraryDataValidationException {

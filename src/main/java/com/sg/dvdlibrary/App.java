@@ -1,19 +1,15 @@
 package com.sg.dvdlibrary;
 
 import com.sg.dvdlibrary.controller.DVDLibraryController;
-import com.sg.dvdlibrary.dao.DVDLibraryDao;
-import com.sg.dvdlibrary.dao.DVDLibraryDaoFileImpl;
-import com.sg.dvdlibrary.ui.DVDLibraryView;
-import com.sg.dvdlibrary.ui.UserIO;
-import com.sg.dvdlibrary.ui.UserIOConsoleImpl;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class App {
 
     public static void main(String[] args) {
-        UserIO myIo = new UserIOConsoleImpl();
-        DVDLibraryView myView = new DVDLibraryView(myIo);
-        DVDLibraryDao myDao = new DVDLibraryDaoFileImpl();
-        DVDLibraryController controller = new DVDLibraryController(myDao, myView);
+        AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext();
+        appContext.scan("com.sg.dvdlibrary");
+        appContext.refresh();
+        DVDLibraryController controller = appContext.getBean("DVDLibraryController", DVDLibraryController.class);
         controller.run();
     }
 }
