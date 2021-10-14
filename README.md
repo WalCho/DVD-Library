@@ -1,6 +1,5 @@
 # DVD Library 
 
-Java library that stores information about a DVD collection following the MVC design pattern and using dependency injection.<br /><br />
 The program does the following:
 
 * Allows the user to add a DVD to the collection
